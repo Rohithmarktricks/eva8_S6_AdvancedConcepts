@@ -3,6 +3,7 @@ from typing import Tuple, Any
 
 
 class Cifar10Dataset(torchvision.datasets.CIFAR10):
+    '''Custom class that creates the transformed CIFAR-10 DataSet'''
 
     def __init__(self, root='~/data/cifar10', train=True, download=True, transform=None):
         super().__init__(root=root, 

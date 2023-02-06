@@ -4,7 +4,8 @@ from tqdm import tqdm
 
 
 class Trainer:
-
+    '''Main class for training and testing the models.
+    Initializer accepts the model(to be trained/tested) and tracks the training/testing stats/metrics.'''
     def __init__(self, model):
         self.model = model
         self.train_losses = []
@@ -14,6 +15,7 @@ class Trainer:
         self.test_acc = []
 
     def train_model(self, device, train_loader, criterion, optimizer, epoch):
+        '''method to train the model.'''
         self.model.train()
         pbar = tqdm(train_loader)
         correct = 0
@@ -50,6 +52,7 @@ class Trainer:
             self.train_acc.append(100*correct/processed)
 
     def test_model(self, device, test_loader, criterion):
+        '''method to test the model'''
         self.model.eval()
         test_loss = 0
         correct = 0
@@ -71,4 +74,5 @@ class Trainer:
         self.test_acc.append(100. * correct / len(test_loader.dataset))
     
     def get_stats(self):
+        '''Returns the stats like loss and metrics like accuracy of a corresponding model'''
         return self.train_losses, self.train_acc, self.test_losses, self.test_acc
